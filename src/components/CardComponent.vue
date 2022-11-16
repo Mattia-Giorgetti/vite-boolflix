@@ -1,17 +1,13 @@
 <template>
   <div class="card-wrap position-relative">
     <div class="card_img p-1">
-      <img
-        class="img-fluid"
-        :src="store.ThumbURL + movie.poster_path"
-        :alt="movie.title"
-      />
+      <img class="img-fluid" :src="image" :alt="titolo" />
     </div>
     <div class="my_card p-1">
-      <h3>{{ movie.title }}</h3>
-      <h4>{{ movie.original_title }}</h4>
-      <p>{{ movie.original_language }}</p>
-      <span>{{ movie.vote_average }}</span>
+      <h3>{{ titolo }}</h3>
+      <h4>{{ titoloOriginale }}</h4>
+      <p>{{ lingua }}</p>
+      <span>{{ voto }}</span>
     </div>
   </div>
 </template>
@@ -21,7 +17,12 @@ import { store } from "../store";
 export default {
   name: "CardComponent",
   props: {
-    movie: Object,
+    // movie: Object,
+    titolo: String,
+    titoloOriginale: String,
+    lingua: String,
+    voto: Number,
+    image: String,
   },
   data() {
     return {
