@@ -24,22 +24,29 @@ export default {
     };
   },
   methods: {
+    callTrend() {
+      axios.get(store.trendURL).then((res) => {
+        store.trendArray = [...res.data.results];
+      });
+    },
     callMovies() {
-      store.loading = true;
       let moviequery = store.searchContent;
       axios.get(store.urlAPI + store.movieEndPoint + moviequery).then((res) => {
         store.movieArray = [...res.data.results];
-        console.log(store.movieArray);
-        store.loading = false;
+        store.showH2 = true;
+        store.showTrend = false;
       });
     },
     callSeries() {
       let seriesquary = store.searchContent;
       axios.get(store.urlAPI + store.seriesEndPoint + seriesquary).then((res) => {
         store.seriesArray = [...res.data.results];
-        console.log(store.seriesArray);
+        store.showH2 = true;
       });
     },
+  },
+  created() {
+    this.callTrend();
   },
 };
 </script>
