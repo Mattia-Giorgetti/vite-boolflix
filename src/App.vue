@@ -6,7 +6,13 @@
     "
   />
   <main>
-    <ListComponent />
+    <ListComponent
+      :Lists="store.trendArray"
+      mainTitle="Top Rated"
+      v-if="store.showTrend"
+    />
+    <ListComponent :Lists="store.movieArray" mainTitle="Films" />
+    <ListComponent :Lists="store.seriesArray" mainTitle="Serie TV" />
   </main>
 </template>
 
@@ -42,6 +48,7 @@ export default {
       axios.get(store.urlAPI + store.seriesEndPoint + seriesquary).then((res) => {
         store.seriesArray = [...res.data.results];
         store.showH2 = true;
+        store.ismovie = false;
       });
     },
   },

@@ -1,5 +1,6 @@
 import { reactive } from "vue";
 export const store = reactive({
+    ismovie: true,
     urlAPI: 'https://api.themoviedb.org/3/search/',
     movieEndPoint: 'movie?api_key=e99307154c6dfb0b4750f6603256716d&query=',
     seriesEndPoint: 'tv?api_key=e99307154c6dfb0b4750f6603256716d&query=',
@@ -16,11 +17,11 @@ export const store = reactive({
     },
     {
         link: 'Films',
-        url: '#films',
+        url: '#Films',
     },
     {
         link: 'Serie TV',
-        url: '#serieTV',
+        url: '#Serie TV',
     },
     {
         link: 'Account',

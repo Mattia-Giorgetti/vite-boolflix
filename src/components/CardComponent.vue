@@ -2,23 +2,37 @@
   <div class="card-wrap position-relative">
     <!-- FRONTE CARD  -->
     <div class="card_img p-1">
-      <img class="img-fluid" :src="image" :alt="titolo" />
+      <img
+        class="img-fluid"
+        :src="
+          item.poster_path
+            ? store.ThumbURL + item.poster_path
+            : 'https://via.placeholder.com/400x600/000000/FFFFFF/?text= Poster Unavailable'
+        "
+      />
     </div>
-
     <!-- CARD HOVER  -->
     <div class="my_card p-1">
       <div class="thumbPreview">
-        <img :src="previewIMG" :alt="titolo" />
+        <img
+          :src="
+            item.backdrop_path
+              ? store.ThumbURL + item.backdrop_path
+              : 'https://via.placeholder.com/300x100/000000/FFFFFF/?text= Thumb Unavailable'
+          "
+        />
       </div>
       <div class="overflow-auto">
-        <h3>{{ titolo }}</h3>
-        <h4>{{ titoloOriginale }}</h4>
+        <h3>{{ item.title }}</h3>
+        <h3 v-if="!store.ismovie">{{ item.name }}</h3>
+        <h4>{{ item.original_title }}</h4>
+        <h4 v-if="!store.ismovie">{{ item.original_name }}</h4>
         <img
-          :src="'/' + flagimage"
-          :alt="lingua"
-          v-if="this.flagsArray.includes(lingua)"
+          :src="'/' + item.original_language + store.flagpath"
+          :alt="item.original_language"
+          v-if="this.flagsArray.includes(item.original_language)"
         />
-        <div v-else>{{ lingua }}</div>
+        <div v-else>{{ item.original_language }}</div>
         <div class="rating pt-1">
           <span
             v-for="n in 5"
@@ -26,7 +40,7 @@
             :class="n <= starRating ? 'fa-solid' : 'fa-regular'"
           ></span>
         </div>
-        <p class="p-3">{{ trama }}</p>
+        <p class="p-3">{{ item.overview }}</p>
       </div>
     </div>
   </div>
@@ -37,14 +51,7 @@ import { store } from "../store";
 export default {
   name: "CardComponent",
   props: {
-    titolo: String,
-    titoloOriginale: String,
-    lingua: String,
-    voto: Number,
-    image: String,
-    flagimage: String,
-    previewIMG: String,
-    trama: String,
+    item: Object,
   },
   data() {
     return {
@@ -54,7 +61,7 @@ export default {
   },
   computed: {
     starRating() {
-      return Math.ceil(this.voto / 2);
+      return Math.ceil(this.item.vote_average / 2);
     },
   },
 };
