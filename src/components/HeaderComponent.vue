@@ -1,6 +1,6 @@
 <template>
   <header
-    class="p-4 bg-black text-danger d-flex justify-content-around align-items-center"
+    class="p-3 bg-black text-danger d-flex justify-content-around align-items-center"
   >
     <h1>Boolflix</h1>
     <nav>
